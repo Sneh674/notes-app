@@ -5,4 +5,9 @@ npm i connect-flash
 git init
 gid add .  //to add all files
 git status
-git rm -r --cached node_modules //to remove node_modules if already added
+//put unnecessary files in gitignore like node_modules
+[ git rm -r --cached node_modules //to remove node_modules if already added ]
+git commit -m "v 1.0"
+git remote add origin git@github.com:Sneh674/notes-app.git.
+git branch -M main
+git push -u origin main
