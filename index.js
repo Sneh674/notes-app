@@ -83,6 +83,10 @@ app.post("/logging", async (req, res) => {
     }
 });
 app.get('/notes',async(req,res)=>{
+    if (!req.session.username) {
+        // If session has expired, redirect to login page
+        return res.redirect('/');
+    }
     let allNotes=await notesModel.find({name: req.session.username})
     // const user=req.flash("user")
     // req.session.username=user
