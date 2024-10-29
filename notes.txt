@@ -1,0 +1,8 @@
+npm i express-session
+npm i connect-flash
+
+
+git init
+gid add .  //to add all files
+git status
+git rm -r --cached node_modules //to remove node_modules if already added

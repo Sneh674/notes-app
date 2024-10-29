@@ -1,0 +1,38 @@
+*{
+    padding: 0%;
+    margin: 0%;
+    background-color: black;
+    color: white;
+}
+
+.notes{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10%;
+    padding: 2%;
+}
+.note{
+    width: 20%;
+    text-wrap: wrap;
+    background-color: rgb(50, 49, 49);;
+    padding: 1%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.ntitle{
+    background-color: rgb(50, 49, 49);
+    font-size: larger;
+    color: rgb(232, 218, 71);
+}
+.ntext{
+    background-color: rgb(50, 49, 49);
+    font-size: medium;
+    color: rgb(196, 196, 148);
+}
+.note>a{
+    background-color: rgb(50, 49, 49);
+    color: blue;
+    display: flex;
+    justify-content: right;
+}

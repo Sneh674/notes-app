@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <link rel="stylesheet" href="stylesheets/style.css">
+</head>
+<body>
+    <h3>Welcome to our website</h3>
+    <div>
+        <h1>Already a user:</h1>
+        <form action="/logging" method="post">
+            <input type="text" name="lname" id="" placeholder="enter name">
+            <input type="text" name="lpassword" placeholder="enter password">
+            <input type="submit" value="Log User">
+        </form>
+        <% if(message.length>0){ %>
+            <div style="color: red;"><%= message %></div>
+        <% } %>
+        <h1>New user:</h1>
+        <a href="/createuser">SignUp</a>
+    </div>
+</body>
+</html>
