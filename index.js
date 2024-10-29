@@ -5,6 +5,7 @@ const session = require("express-session");
 const flash = require("connect-flash");
 const loggedModel = require("./models/logged");
 const notesModel = require("./models/notes");
+require('dotenv').config();
 
 // Middleware setup
 app.use(express.json());
@@ -109,6 +110,8 @@ app.get("/notes/delete/:id", async(req,res)=>{
     res.redirect("/notes")
 })
 
-app.listen(3000, () => {
+
+const PORT=process.env.Port || 3000
+app.listen(PORT, () => {
     console.log("Server is running on port 3000");
 });

@@ -12,3 +12,5 @@ git remote add origin git@github.com:Sneh674/notes-app.git.
 git remote set-url origin https://github.com/Sneh674/notes-app.git
 git branch -M main
 git push -u origin main
+
+npm i dotenv  // to hide sensitive data
