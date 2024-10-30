@@ -73,6 +73,7 @@ body{
 
 .notesadd{
     padding-left: 20px;
+    margin-bottom: 25px;
 }
 .notesadd>div{
     margin-bottom: 10px;
@@ -100,4 +101,268 @@ body{
     color: rgb(205, 205, 207);
     width: 150px;
     background-color: #5f5f61;
+}
+
+
+@media (max-width: 750px) {
+    .notesadd>div{
+        font-size: larger;
+    }
+    .notesmain{
+        padding: 15px;
+    }
+    .noteshead{
+        margin: 15px;
+    }
+    .notes{
+        gap: 30px;
+    }
+    .note{
+        width: 170px;
+    }
+    .ntitle{
+        font-size: large;
+        height: 80px;
+    }
+    .ntext{
+        height: 130px;
+    }
+}
+
+@media (max-width: 630px) {
+    .notesadd>div{
+        font-size: larger;
+    }
+    .notesmain{
+        padding: 15px;
+    }
+    .noteshead{
+        margin: 15px;
+    }
+    .notes{
+        gap: 60px;
+    }
+    .note{
+        width: 200px;
+    }
+    .ntitle{
+        font-size: large;
+        height: 80px;
+    }
+    .ntext{
+        height: 130px;
+    }
+}
+
+@media (max-width: 520px) {
+    .notesadd>div{
+        font-size: large;
+    }
+    .notesmain{
+        padding: 12px;
+    }
+    .noteshead{
+        margin: 12px;
+    }
+    .notes{
+        gap: 60px;
+    }
+    .note{
+        width: 170px;
+        padding: 15px;
+    }
+    .ntitle{
+        font-size: large;
+        height: 65px;
+    }
+    .ntext{
+        height: 90px;
+        font-size: medium;
+    }
+    .notesadd>form{
+        width: 350px;
+        gap: 7px;
+    }
+}
+@media (max-width: 490px) {
+    .notes{
+        gap: 20px;
+    }
+}
+@media (max-width: 440px) {
+    .notesadd>div{
+        font-size: medium;
+    }
+    .notesmain{
+        padding: 10px;
+    }
+    .noteshead{
+        margin: 10px;
+        font-size: x-large;
+    }
+    .notes{
+        gap: 50px;
+    }
+    .note{
+        width: 130px;
+        padding: 15px;
+    }
+    .ntitle{
+        font-size: medium;
+        height: 50px;
+    }
+    .ntext{
+        height: 70px;
+        font-size: small;
+    }
+    .notesadd>form{
+        width: 300px;
+        gap: 6px;
+    }
+    .addbtn{
+        width: 100px;
+    }
+    .smlink{
+        font-size: small;
+    }
+    .edel{
+        font-size: small;
+    }
+}
+@media (max-width: 400px) {
+    .notes{
+        gap: 20px;
+    }
+}
+@media (max-width: 360px) {
+    .notesadd>div{
+        font-size: medium;
+    }
+    .notesmain{
+        padding: 8px;
+    }
+    .noteshead{
+        margin: 8px;
+    }
+    .notes{
+        gap: 10px;
+    }
+    .note{
+        border-radius: 10px;
+        width: 75px;
+        padding: 10px;
+    }
+    .ntitle{
+        font-size: x-small;
+        height: 25px;
+    }
+    .ntext{
+        height: 50px;
+        font-size: x-small;
+    }
+    .notesadd{
+        padding-left: 10px;
+        margin-bottom: 15px;
+    }
+    .notesadd>form{
+        width: 270px;
+        gap: 6px;
+    }
+    .notesadd>form>input{
+        border-radius: 10px;
+        padding: 7px;
+    }
+    .notesadd>form>textarea{
+        border-radius: 10px;
+        padding: 7px;
+    }
+    .addbtn{
+        width: 80px;
+        font-size: small;
+    }
+    .smlink{
+        font-size: x-small;
+    }
+    .edel{
+        font-size: x-small;
+        gap: 6px;
+    }
+}
+
+@media (max-width: 320px) {
+    .notesadd>div{
+        font-size: smaller;
+    }
+    .notesmain{
+        padding: 6px;
+    }
+    .loglink{
+        font-size: x-small;
+    }
+    .noteshead{
+        margin: 6px;
+        font-size: large;
+    }
+    .notes{
+        gap: 6px;
+    }
+    .note{
+        border-radius: 10px;
+        width: 75px;
+        padding: 10px;
+    }
+    .ntitle{
+        font-size: xx-small;
+        height: 25px;
+    }
+    .ntext{
+        height: 50px;
+        font-size: xx-small;
+    }
+    .notesadd{
+        padding-left: 10px;
+        margin-bottom: 15px;
+    }
+    .notesadd>form{
+        width: 270px;
+        gap: 6px;
+    }
+    .notesadd>form>input{
+        border-radius: 10px;
+        padding: 7px;
+    }
+    .notesadd>form>textarea{
+        border-radius: 10px;
+        padding: 7px;
+    }
+    .addbtn{
+        width: 80px;
+        font-size: small;
+    }
+    .smlink{
+        font-size: xx-small;
+    }
+    .edel{
+        font-size: xx-small;
+        gap: 6px;
+    }
+}
+@media (max-width: 310px) {
+    .notesadd>form{
+        width: 200px;
+    }
+    .notes{
+        gap: 5px;
+    }
+    .note{
+        width: 70px;
+    }
+}
+@media (max-width: 310px) {
+    .notes{
+        gap: 20px;
+    }
+    .note{
+        width: 90px;
+    }
 }
