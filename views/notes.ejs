@@ -27,7 +27,10 @@
             <div class="note">
                 <div class="ntitle"><%= note.title %></div>
                 <div class="ntext"><%= note.content %></div>
-                <a href="/notes/delete/<%= note._id %>" style="color: blue;">delete</a>
+                <div class="edel">
+                    <a href="/notes/edit/<%= note._id %>" style="color: rgb(102, 102, 240);">edit</a>
+                    <a href="/notes/delete/<%= note._id %>" style="color: blue;">delete</a>
+                </div>
             </div>
         <% }) %>
     </div>

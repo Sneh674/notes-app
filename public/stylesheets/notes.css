@@ -1,8 +1,10 @@
 *{
     padding: 0%;
     margin: 0%;
-    background-color: black;
     color: white;
+}
+body{
+    background-color: black;
 }
 
 .notes{
@@ -34,5 +36,12 @@
     background-color: rgb(50, 49, 49);
     color: blue;
     display: flex;
+    justify-content: right;
+}
+
+.edel{
+    display: flex;
+    background-color: rgb(50, 49, 49);
+    gap: 10%;
     justify-content: right;
 }

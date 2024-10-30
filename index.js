@@ -5,6 +5,7 @@ const session = require("express-session");
 const flash = require("connect-flash");
 const loggedModel = require("./models/logged");
 const notesModel = require("./models/notes");
+const { render } = require("ejs");
 require('dotenv').config();
 
 // Middleware setup
@@ -111,6 +112,20 @@ app.post("/notes/add", async(req,res)=>{
 app.get("/notes/delete/:id", async(req,res)=>{
     let deletedNote=await notesModel.findOneAndDelete({_id: req.params.id})
     req.session.username=deletedNote.name
+    res.redirect("/notes")
+})
+app.get("/notes/edit/:id", async(req,res)=>{
+    let editNote=await notesModel.findOne({_id: req.params.id})
+    req.session.username=editNote.name
+    res.render("edit",{ etitle: editNote.title, etxt: editNote.content, eid: editNote._id })
+})
+app.post("/notes/edit/edited", async(req,res)=>{
+    let { etitle, etxt, eid } = req.body
+    let editedNote = await notesModel.findByIdAndUpdate(
+        eid,  // The ID of the note to update
+        { title: etitle, content: etxt }
+    );
+    req.session.username=editedNote.name
     res.redirect("/notes")
 })
 

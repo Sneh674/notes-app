@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <div>Edit the note</div>
+        <form action="/notes/edit/edited" method="post">
+            <input type="text" name="etitle" id="" value="<%= etitle %>">
+            <input type="text" name="etxt" id="" value="<%= etxt %>">
+            <input type="hidden" name="eid" value="<%= eid %>">
+            <input type="submit" value="Edit Note">
+        </form>
+    </div>
+</body>
+</html>
