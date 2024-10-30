@@ -15,17 +15,38 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
     secret: 'secret_key', // replace with a secure key
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: false,
+    cookie: { maxAge: 5 * 24 * 60 * 60 * 1000 } //for 5 days
 }));
 app.use(flash());
 
 app.set("view engine", "ejs");
 
+// Middleware to check session for protected routes
+function isLoggedIn(req, res, next) {
+    if (req.session.username) {
+        return next();
+    }
+    res.redirect('/');
+}
+
 // Routes
 app.get('/', (req, res) => {
+    if (req.session.username) {
+        return res.redirect('/notes'); // Auto-login if session exists
+    }
     const message = req.flash("message");
     res.render("index", { message });
 });
+// // Routes
+// app.get('/', (req, res) => {
+//     const message = req.flash("message");
+//     res.render("index", { message });
+// });
+app.get("/logout",(req,res)=>{
+    req.session.username=undefined
+    res.redirect("/")
+})
 
 app.get('/createuser', (req, res) => {
     const message = req.flash("message");  // Retrieve the flash message
@@ -128,7 +149,11 @@ app.post("/notes/edit/edited", async(req,res)=>{
     req.session.username=editedNote.name
     res.redirect("/notes")
 })
-
+app.get("/notes/full/:id", async(req,res)=>{
+    let fullNote=await notesModel.findOne({_id: req.params.id})
+    req.session.username=fullNote.name
+    res.render("full", { ftitle:fullNote.title, ftext:fullNote.content })
+})
 
 const PORT=process.env.Port || 3000
 app.listen(PORT, () => {

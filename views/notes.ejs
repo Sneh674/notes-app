@@ -4,22 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="stylesheets/style.css">
     <link rel="stylesheet" href="stylesheets/notes.css">
+    <link rel="stylesheet" href="stylesheets/notesblack.css">
 </head>
 <body>
-    <h3>Notes</h3>
-    <a href="/">Go to LogIn page</a>
-    <%  %>
-    <div>
-        <%= user %>
+    <div class="notesmain">
+        <a href="/logout" class="loglink">Log Out</a>
+        <div class="noteshead">Your Notes</div>
+        <!-- <div class="notesuser">
+            <%= user %>
+        </div> -->
     </div>
-    <div>
+    <div class="notesadd">
         <div>Add a note</div>
         <form action="/notes/add" method="post">
             <input type="hidden" name="username" value="<%= user %>">
-            <input type="text" name="title" id="" placeholder="enter title">
-            <input type="text" name="content" id="" placeholder="enter content">
-            <input type="submit" value="Add Note">
+            <input type="text" name="title" id="addtitle" placeholder="enter title">
+            <!-- <input type="text" name="content" id="addcont" row="5" placeholder="enter content"> -->
+            <textarea name="content" id="addcont" rows="5" placeholder="enter content"></textarea>
+            <input type="submit" value="Add Note" class="addbtn" style="color: rgb(250, 177, 81);">
         </form>
     </div>
     <div class="notes">
@@ -27,6 +31,7 @@
             <div class="note">
                 <div class="ntitle"><%= note.title %></div>
                 <div class="ntext"><%= note.content %></div>
+                <div class="smlink"><a href="/notes/full/<%= note._id %>">See More</a></div>
                 <div class="edel">
                     <a href="/notes/edit/<%= note._id %>" style="color: rgb(102, 102, 240);">edit</a>
                     <a href="/notes/delete/<%= note._id %>" style="color: blue;">delete</a>
