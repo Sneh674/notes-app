@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Your-Note--Notes-App-bySnehNaik</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/full.css">
 </head>
 <body>
-    <div>
+    <div class="fullmain">
         <a href="/notes">Go Back</a>
         <div class="fullcont">
             <div class="fulltitle"><%= ftitle %></div>
-            <div class="fulltext"><%= ftext %></div>
+            <% let formatted=ftext.replace(/\n/g, '<br>') %>
+            <div class="fulltext"><%- formatted %></div>
         </div>
     </div>
 </body>

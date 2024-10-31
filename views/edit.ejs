@@ -3,17 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Edit-Notes--Notes-App-bySnehNaik</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/edit.css">
 </head>
 <body>
-    <div>
+    <div class="editmain">
         <div>Edit the note</div>
-        <form action="/notes/edit/edited" method="post">
-            <input type="text" name="etitle" id="" value="<%= etitle %>">
-            <input type="text" name="etxt" id="" value="<%= etxt %>">
-            <input type="hidden" name="eid" value="<%= eid %>">
-            <input type="submit" value="Edit Note">
-        </form>
+        <div class="form">
+            <form action="/notes/edit/edited" method="post">
+                <label for="etitle">Title:</label>
+                <!-- <input type="text" name="etitle" id="" value="<%= etitle %>" class="inp"> -->
+                <textarea name="etitle" id="etitle" class="inp" oninput="autoResize(this)"><%= etitle %></textarea>
+                <label for="etxt">Content:</label>
+                <!-- <input type="text" name="etxt" id="" value="<%= etxt %>"> -->
+                <textarea name="etxt" id="etxt" class="inp" oninput="autoResize(this)"><%= etxt %></textarea>
+                <input type="hidden" name="eid" value="<%= eid %>">
+                <input type="submit" value="Edit Note" id="ebtn">
+            </form>
+        </div>
     </div>
+
+    <script>
+        // const textarea=document.querySelector("textarea");
+        // textarea.addEventListener("keyup", e=>{
+        //     let scHeight = e.target.scrollHeight;
+        //     textarea.style.height=`${scHeight}px`;
+        // })
+        document.addEventListener("DOMContentLoaded", function () {
+            const textarea1 = document.getElementById("etitle");
+            autoResize(textarea1); // Set height based on initial content
+            const textarea2 = document.getElementById("etxt");
+            autoResize(textarea2); 
+        });
+
+        function autoResize(textarea) {
+            textarea.style.height = 'auto'; // Reset height to allow shrinking
+            textarea.style.height = textarea.scrollHeight + 'px'; // Set height based on content
+        }
+    </script>
 </body>
 </html>

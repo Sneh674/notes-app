@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Your-Notes--Notes-App-bySnehNaik</title>
     <link rel="stylesheet" href="stylesheets/style.css">
     <link rel="stylesheet" href="stylesheets/notes.css">
-    <link rel="stylesheet" href="stylesheets/notesblack.css">
 </head>
 <body>
     <div class="notesmain">
@@ -21,8 +20,8 @@
         <form action="/notes/add" method="post">
             <input type="hidden" name="username" value="<%= user %>">
             <input type="text" name="title" id="addtitle" placeholder="enter title">
-            <!-- <input type="text" name="content" id="addcont" row="5" placeholder="enter content"> -->
-            <textarea name="content" id="addcont" rows="5" placeholder="enter content"></textarea>
+            <input type="hidden" name="content" id="addcont" placeholder="enter content" value="">
+            <!-- <textarea name="content" id="addcont" rows="5" placeholder="enter content"></textarea> -->
             <input type="submit" value="Add Note" class="addbtn" style="color: rgb(250, 177, 81);">
         </form>
     </div>
