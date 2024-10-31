@@ -4,16 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notes-App-bySnehNaik</title>
-    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/index.css">
 </head>
 <body>
-    <h3>Welcome to our website</h3>
+    <h2>Welcome to our website</h2>
     <div>
         <h1>Already a user:</h1>
         <form action="/logging" method="post">
             <input type="text" name="lname" id="" placeholder="enter name">
             <input type="text" name="lpassword" placeholder="enter password">
-            <input type="submit" value="Log User">
+            <input type="submit" value="Log User" id="cubtn">
         </form>
         <% if(message.length>0){ %>
             <div style="color: red;"><%= message %></div>

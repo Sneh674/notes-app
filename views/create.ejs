@@ -4,17 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create-user--Notes-App-bySnehNaik</title>
-    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/create.css">
 </head>
 <body>
     <div><a href="/">Go to LogIn Page</a></div>
-    <h1>Create User</h1>
+    <div class="crt">Create User</div>
     <div>
         <form action="/createuser/create" method="post">
             <input type="text" name="uname" placeholder="enter name">
             <input type="email" name="uemail" id="" placeholder="enter email">
             <input type="text" name="upassword" id="" placeholder="enter password">
-            <input type="submit" value="Create User">
+            <input type="submit" value="Create User" id="crtbtn">
         </form>
     </div>
     <% if(message.length>0){ %>
