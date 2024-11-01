@@ -32,6 +32,7 @@ a{
     word-wrap: break-word;      /* Breaks long words onto the next line */
     word-break: break-all;      /* Forces a break at any point if necessary */
     overflow-wrap: break-word;
+    width: 95%;
 }
 .fulltext{
     font-size: x-large;
@@ -42,6 +43,7 @@ a{
     word-wrap: break-word;      /* Breaks long words onto the next line */
     word-break: break-all;      /* Forces a break at any point if necessary */
     overflow-wrap: break-word;
+    width: 95%;
 }
 
 @media (max-width: 1050px) {
