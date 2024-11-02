@@ -18,6 +18,6 @@ const noteSchema=mongoose.Schema({
     content: {
         type: String
     }
-})
+}, { timestamps: true })
 
 module.exports=mongoose.model('notes', noteSchema);

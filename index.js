@@ -7,6 +7,7 @@ const loggedModel = require("./models/logged");
 const notesModel = require("./models/notes");
 const { render } = require("ejs");
 require('dotenv').config();
+const crypto = require('crypto');
 
 // Middleware setup
 app.use(express.json());
@@ -38,11 +39,6 @@ app.get('/', (req, res) => {
     const message = req.flash("message");
     res.render("index", { message });
 });
-// // Routes
-// app.get('/', (req, res) => {
-//     const message = req.flash("message");
-//     res.render("index", { message });
-// });
 app.get("/logout",(req,res)=>{
     req.session.username=undefined
     res.redirect("/")
@@ -65,12 +61,15 @@ app.post("/createuser/create", async (req, res) => {
             req.flash("message", "Username already exists");  // Set the flash message
             return res.redirect("/createuser");  // Redirect back to creation page
         }
+        function hashPassword(password) {
+            return crypto.createHash('sha256').update(password).digest('hex');
+        }
 
         // Create the new user if the username doesn't exist
         let createdUser = await loggedModel.create({
             name: uname,
             email: uemail,
-            password: upassword
+            password: hashPassword(upassword)
         });
         req.flash("message", "");
         res.redirect("/");
@@ -83,9 +82,12 @@ app.post("/createuser/create", async (req, res) => {
 app.post("/logging", async (req, res) => {
     try {
         let { lname, lpassword } = req.body;
+        function hashPassword(password) {
+            return crypto.createHash('sha256').update(password).digest('hex');
+        }
         
         // Find user with matching name and password
-        let luser = await loggedModel.findOne({ name: lname, password: lpassword });
+        let luser = await loggedModel.findOne({ name: lname, password: hashPassword(lpassword) });
         
         if (luser) {
             // res.send("User logged in successfully!");
@@ -109,7 +111,8 @@ app.get('/notes',async(req,res)=>{
         // If session has expired, redirect to login page
         return res.redirect('/');
     }
-    let allNotes=await notesModel.find({name: req.session.username})
+    // let allNotes=await notesModel.find({name: req.session.username})
+    let allNotes=await notesModel.find({name: req.session.username}).sort({ updatedAt: -1 })
     // const user=req.flash("user")
     // req.session.username=user
     res.render('notes', {user: req.session.username, allnotes: allNotes})
