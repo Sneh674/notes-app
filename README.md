@@ -1,2 +1,3 @@
 # notes-app
-passwords are not encrypted
+passwords are encrypted
+cookies will be used to store jwt tokens for user authentication
