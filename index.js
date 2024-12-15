@@ -8,6 +8,10 @@ const notesModel = require("./models/notes");
 const { render } = require("ejs");
 require('dotenv').config();
 const crypto = require('crypto');
+const jwt=require("jsonwebtoken");
+const {createToken, verifyToken}=require("./middleware/jwt_auth.js")
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
 
 // Middleware setup
 app.use(express.json());
@@ -24,16 +28,17 @@ app.use(flash());
 app.set("view engine", "ejs");
 
 // Middleware to check session for protected routes
-function isLoggedIn(req, res, next) {
-    if (req.session.username) {
-        return next();
-    }
-    res.redirect('/');
-}
+// function isLoggedIn(req, res, next) {
+//     if (req.session.username) {
+//         return next();
+//     }
+//     res.redirect('/');
+// }
 
 // Routes
-app.get('/', (req, res) => {
-    if (req.session.username) {
+app.get('/',verifyToken ,(req, res) => {
+    // console.log(req.session.username)
+    if (req.username) {
         return res.redirect('/notes'); // Auto-login if session exists
     }
     const message = req.flash("message");
@@ -41,6 +46,11 @@ app.get('/', (req, res) => {
 });
 app.get("/logout",(req,res)=>{
     req.session.username=undefined
+    // Clear the JWT cookie
+    res.clearCookie("auth_token", {
+        httpOnly: true,
+        secure: true, // Ensure this matches your cookie configuration
+    });
     res.redirect("/")
 })
 
@@ -65,11 +75,18 @@ app.post("/createuser/create", async (req, res) => {
             return crypto.createHash('sha256').update(password).digest('hex');
         }
 
+
         // Create the new user if the username doesn't exist
         let createdUser = await loggedModel.create({
             name: uname,
             email: uemail,
             password: hashPassword(upassword)
+        });
+        const token=createToken(createdUser.name);
+        res.cookie("auth_token", token, {
+            httpOnly: true, // Prevent client-side JavaScript access
+            secure: true, // Use secure cookies in production with HTTPS
+            maxAge: 7 * 24 * 60 * 60 * 1000, // Cookie expiration (7 days)
         });
         req.flash("message", "");
         res.redirect("/");
@@ -92,7 +109,14 @@ app.post("/logging", async (req, res) => {
         if (luser) {
             // res.send("User logged in successfully!");
             // req.flash("user", luser.name)
-            req.session.username=luser.name
+            const token=createToken(luser.name);
+            // req.session.username=luser.name
+            console.log(token);
+            res.cookie("auth_token", token, {
+                httpOnly: true, // Prevent client-side JavaScript access
+                secure: true, // Use secure cookies in production with HTTPS
+                maxAge: 7 * 24 * 60 * 60 * 1000, // Cookie expiration (7 days)
+            });
             res.redirect("/notes")
             // res.render('notes.ejs', {user: luser})
         } else {
@@ -106,21 +130,22 @@ app.post("/logging", async (req, res) => {
         res.redirect("/")
     }
 });
-app.get('/notes',async(req,res)=>{
-    if (!req.session.username) {
-        // If session has expired, redirect to login page
-        return res.redirect('/');
-    }
+app.get('/notes',verifyToken ,async(req,res)=>{
+    const uname=req.username;
+    console.log(req.username)
+    // if (!req.session.username) {
+    //     // If session has expired, redirect to login page
+    //     return res.redirect('/');
+    // }
     // let allNotes=await notesModel.find({name: req.session.username})
-    let allNotes=await notesModel.find({name: req.session.username}).sort({ updatedAt: -1 })
+    let allNotes=await notesModel.find({name: uname}).sort({ updatedAt: -1 })
     // const user=req.flash("user")
     // req.session.username=user
-    res.render('notes', {user: req.session.username, allnotes: allNotes})
-    // localStorage.setItem("username",user)
-    // res.render('notes', {user: localStorage.getItem("username",user)})
+    res.render('notes', {user: uname, allnotes: allNotes})
 })
 app.post("/notes/add", async(req,res)=>{
     try{
+        console.log(req.body);
         let { username, title, content } = req.body
         let createdNote = await notesModel.create({
             name: username,
@@ -139,6 +164,7 @@ app.get("/notes/delete/:id", async(req,res)=>{
     res.redirect("/notes")
 })
 app.get("/notes/edit/:id", async(req,res)=>{
+    console.log("params",req.params.id);
     let editNote=await notesModel.findOne({_id: req.params.id})
     req.session.username=editNote.name
     res.render("edit",{ etitle: editNote.title, etxt: editNote.content, eid: editNote._id })
@@ -153,6 +179,8 @@ app.post("/notes/edit/edited", async(req,res)=>{
     res.redirect("/notes")
 })
 app.get("/notes/full/:id", async(req,res)=>{
+    // console.log("body",req.body);
+    console.log("params",req.params.id);
     let fullNote=await notesModel.findOne({_id: req.params.id})
     req.session.username=fullNote.name
     res.render("full", { ftitle:fullNote.title, ftext:fullNote.content })
